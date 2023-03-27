@@ -17,7 +17,7 @@ const Search = (props) => {
                         placeholder="Search For A Game" />
                     <input type="submit" />
                 </form>
-            </div>
+            </div >
 
         </>
     )

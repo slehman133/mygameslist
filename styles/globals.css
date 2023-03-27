@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 
-:root {}
 
 /* scrollbar */
 ::-webkit-scrollbar {
@@ -26,4 +25,9 @@
 
 ::-webkit-scrollbar-thumb:window-inactive {
     background: rgba(255, 255, 255, 0.3);
+}
+
+.home-container {
+    background-image: url("https://i.pinimg.com/originals/0f/1a/31/0f1a31a2ab5942001298f09613338bb2.jpg");
+
 }

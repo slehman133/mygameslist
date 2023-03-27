@@ -19,7 +19,7 @@ const NavBar = () => {
                     </Link>
                 </div>
                 {/* nav items */}
-                <div className="flex items-center space-x-5 text-2xl font-semibold">
+                <div className="flex items-center space-x-5 text-xl font-semibold">
                     <div className='invisible flex items-center space-x-5 md:visible'>
                         <div>
                             <Link
