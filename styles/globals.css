@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 
+html {
+    scroll-behavior: smooth;
+}
+
 
 /* scrollbar */
 ::-webkit-scrollbar {
@@ -29,5 +33,5 @@
 
 .home-container {
     background-image: url("https://i.pinimg.com/originals/0f/1a/31/0f1a31a2ab5942001298f09613338bb2.jpg");
-
+    background-repeat: none;
 }

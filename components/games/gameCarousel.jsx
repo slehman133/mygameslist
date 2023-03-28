@@ -1,5 +1,5 @@
 import CarouselItem from "./carouselItem"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const GameCarousel = (props) => {
     const items = props.games.map(e =>
@@ -11,6 +11,7 @@ const GameCarousel = (props) => {
     )
 
     const [i, setI] = useState(0)
+
 
     return (
         <>
