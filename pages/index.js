@@ -35,23 +35,28 @@ export default function Home() {
         </div>
       </div>
       <div className='p-16'>
-        <h1 className='text-6xl font-bold shadow-lg'>What is MyGamesList?</h1>
-        <div className='p-16 font-semibold text-2xl'>
-          <p>MyGamesList is a platform to track and share your favorite games with your friends.</p>
-          <p>Show off the games you've played and love.</p>
-          <div className='flex p-10 gap-20'>
-            <Link href="/login">
-              <div className=' border-black border-2 p-10 w-30 text-center 
+        <h1 className='text-6xl font-bold'>What is MyGamesList?</h1>
+        <div className='grid grid-cols-2'>
+          <div className='p-16 font-semibold text-2xl'>
+            <p>MyGamesList is a platform to track and share your favorite games with your friends.</p>
+            <p>Show off the games you've played and loved.</p>
+            <div className='flex p-10 gap-20'>
+              <Link href="/login">
+                <div className=' border-black border-2 p-10 w-30 text-center 
             hover:bg-black hover:text-white hover:cursor-pointer'>
-                <h1>Create an account</h1>
-              </div>
-            </Link>
-            <Link href="/login">
-              <div className=' border-black border-2 p-10 w-64 text-center 
+                  <h1>Create an account</h1>
+                </div>
+              </Link>
+              <Link href="/login">
+                <div className=' border-black border-2 p-10 w-64 text-center 
             hover:bg-black hover:text-white hover:cursor-pointer'>
-                <h1>Log In</h1>
-              </div>
-            </Link>
+                  <h1>Log In</h1>
+                </div>
+              </Link>
+            </div>
+          </div>
+          <div>
+            <img src="/img/game_covers.png" alt="" />
           </div>
         </div>
       </div >
