@@ -1,10 +1,10 @@
 import Link from 'next/link'
-import styles from './nav-bar.module.css'
-import { useState } from 'react'
-
+import { useSession } from 'next-auth/react'
 
 const NavBar = () => {
-    const [isLoggedIn, setLoggedIn] = useState(false)
+    const { data, status } = useSession()
+
+
     return (
         <nav className='bg-black text-white'>
             {/* logo */}
@@ -12,7 +12,6 @@ const NavBar = () => {
                 <div>
                     <Link className="font-bold"
                         href="/">
-                        {/* <h1>MyGamesList</h1> */}
                         <img className='h-20'
                             src="/img/mygameslist-logo.png"
                             alt="Logo for MyGamesList" />
@@ -37,7 +36,7 @@ const NavBar = () => {
                                 Games
                             </Link>
                         </div>
-                        {isLoggedIn ?
+                        {status === 'authenticated' ?
                             <>
                                 <div className=''>
                                     <Link href="/users/TestUser">
@@ -48,7 +47,7 @@ const NavBar = () => {
                             :
                             <>
                                 <div className=''>
-                                    <Link href="/login">
+                                    <Link href="/api/auth/signin">
                                         Login
                                     </Link>
                                 </div>
@@ -67,6 +66,7 @@ const NavBar = () => {
                 </div>
             </div>
         </nav>
+
     )
 }
 

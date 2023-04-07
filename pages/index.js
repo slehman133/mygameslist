@@ -14,7 +14,7 @@ const Home = () => {
         <title>Welcome to MyGamesList</title>
       </Head>
       <div className='grid grid-cols-8 p-10 bg-none home-container'>
-        <div className='col-start-2 col-span-3'>
+        <div className={`col-start-2 col-span-3 ${blippo.className}`}>
           <div className='bg-black min-w-fit'>
             <h1 className='text-8xl font-bold text-white p-2'>WELCOME</h1>
           </div>
@@ -22,13 +22,13 @@ const Home = () => {
             <h1 className='text-8xl font-bold'>TO</h1>
           </div>
           <div className='bg-black min-w-fit'>
-            <h1 className={`text-8xl font-bold text-white p-4 ${blippo.className}`}>MyGamesList</h1>
+            <h1 className={`text-8xl font-bold text-white p-4`}>MyGamesList</h1>
           </div>
           <Link
             className='font-bold text-3xl '
             href="/games">
             <div className='border-black border-2 text-center m-8 
-              p-8 overflow-hidden
+              p-8 overflow-hidden font-sans
               hover:cursor-pointer hover:bg-black hover:text-white'>
               View Our Games
             </div>

@@ -11,18 +11,36 @@ datasource db {
 }
 
 model User {
-  id        String   @db.Uuid
+  id        Int      @id @default(autoincrement())
   username  String   @unique
   email     String
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+  reviews   Review[]
 }
 
 model Game {
-  id      Int    @id
-  name    String
-  summary String
-  slug    String
-  cover   String
+  id         Int      @id
+  name       String
+  summary    String
+  slug       String
+  cover      String
+  reviews    Review[]
+  isFeatured Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+}
+
+model Review {
+  id         Int    @id @default(autoincrement())
+  author     User   @relation(fields: [authorName], references: [username])
+  authorName String
+
+  Game   Game?  @relation(fields: [gameId], references: [id])
+  gameId Int?
+  body   String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }

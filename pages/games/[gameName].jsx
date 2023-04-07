@@ -3,25 +3,34 @@ import Image from "next/image";
 import { getGameInfo } from "../../lib/game-info";
 import UserControls from "../../components/[gameName]/user-controls";
 import { useState } from "react";
+import UserReview from "../../components/[gameName]/userReview";
 
 
 export async function getServerSideProps(context) {
     const slug = String(context.params.gameName).toLowerCase().replaceAll(" ", "-")
     const game = await getGameInfo(slug)
 
+
+    if (game == null) {
+        return {
+            notFound: true
+        }
+    }
+    const reviews = await fetch(`http://localhost:3000/api/games/reviews/${game.id}`)
+        .then(res => res.json())
+
     return {
         props: {
             cover: `https://${game.cover}`,
             name: game.name,
             summary: game.summary,
+            reviews
         },
     };
 }
 
 const GamePage = (props) => {
-
-    const [reviews, setReviews] = useState([])
-
+    const [reviews, setReviews] = useState(props.reviews)
     return (
         <>
             <Head>
@@ -46,12 +55,19 @@ const GamePage = (props) => {
                     </div>
                     <p className="text-lg">{props.summary}</p>
                     <div className="my-20">
-                        <h3 className="text-3xl font-semibold">User Reviews</h3>
+                        <h3 className="text-3xl font-semibold mb-5">User Reviews</h3>
                         {reviews.length == 0 ?
                             <h4 className="text-center m-20 text-xl">
                                 No reviews for this game yet :(
                             </h4>
-                            : reviews.map((e) => <p>{e}</p>)}
+                            : <div className="max-h-96 overflow-auto">
+                                {reviews.map((e) =>
+                                    <UserReview
+                                        key={e.id}
+                                        body={e.body}
+                                        username={e.authorName} />)}
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

@@ -40,7 +40,7 @@ const UserControls = () => {
                 </>
                 :
                 <>
-                    <div onClick={() => setLoggedIn(true)}>
+                    <div className='' onClick={() => setLoggedIn(true)}>
                         <p>Log in to track this game.</p>
                     </div>
                 </>

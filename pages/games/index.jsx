@@ -13,13 +13,18 @@ export async function getServerSideProps(context) {
     }
 }
 
+
+
+
 const Games = (props) => {
     const recentlyAdded = props.games.slice(0, props.games.length).reverse().slice(0, 6)
+
     return (
         <>
             <Head>
                 <title>Games on MyGamesList</title>
             </Head>
+
             <div className="m-5 mx-12">
                 <h1 className="font-bold text-4xl ml-5">Featured Games</h1>
                 <GameCarousel games={props.games.slice(0, 3)} />
@@ -37,7 +42,7 @@ const Games = (props) => {
                 </div>
             </div>
             <div className="m-5 mx-12">
-                <h1 className="font-bold text-4xl ml-5">All Games</h1>
+                <h1 className="font-bold text-4xl ml-5">{`All Games (${props.games.length})`}</h1>
                 <div className="flex flex-wrap">
                     {props.games.map((game) =>
                         <GameCard
