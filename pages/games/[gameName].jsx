@@ -10,12 +10,12 @@ export async function getServerSideProps(context) {
     const slug = String(context.params.gameName).toLowerCase().replaceAll(" ", "-")
     const game = await getGameInfo(slug)
 
-
     if (game == null) {
         return {
             notFound: true
         }
     }
+
     const reviews = await fetch(`http://localhost:3000/api/games/reviews/${game.id}`)
         .then(res => res.json())
 
