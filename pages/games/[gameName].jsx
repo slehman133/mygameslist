@@ -4,6 +4,7 @@ import { getGameInfo } from "../../lib/game-info";
 import UserControls from "../../components/[gameName]/user-controls";
 import { useState } from "react";
 import UserReview from "../../components/[gameName]/userReview";
+import { useSession } from "next-auth/react";
 
 
 export async function getServerSideProps(context) {
@@ -31,6 +32,7 @@ export async function getServerSideProps(context) {
 
 const GamePage = (props) => {
     const [reviews, setReviews] = useState(props.reviews)
+    const { session, status } = useSession()
     return (
         <>
             <Head>
@@ -54,6 +56,31 @@ const GamePage = (props) => {
                         </h1>
                     </div>
                     <p className="text-lg">{props.summary}</p>
+                    {status === 'authenticated' &&
+                        <div className="my-20 ">
+                            <h3 className="text-lg font-bold">Write a review</h3>
+                            <form action="">
+                                <textarea
+                                    className="border-2 h-32 min-w-full p-2"
+                                    type="text"
+                                    name="review"
+                                    placeholder="Write a review here." />
+                                <div className="flex flex-row-reverse">
+                                    <div
+                                        className="bg-black p-2 text-white border-black border-2
+                                    hover:bg-white hover:text-black">
+                                        <input
+                                            type="submit"
+                                            value="Submit"
+                                            onSubmit={(e) => {
+                                                e.preventDefault()
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    }
                     <div className="my-20">
                         <h3 className="text-3xl font-semibold mb-5">User Reviews</h3>
                         {reviews.length == 0 ?

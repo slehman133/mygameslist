@@ -7,13 +7,14 @@ const SignUp = () => {
     return (
         <div className="grid grid-cols-3">
             <div className="border-black border-2 col-start-2 
-            text-center p-12 m-40 shadow-xl overflow-hidden max-w-fit">
-                <h1 className="font-bold m-10 text-2xl text-ellipsis resize-none">{
-                    (username === '') ? "SignUp" : `Hello, ${username}`
-                }</h1>
+            text-center p-12 m-40 shadow-xl overflow-hidden max-w-fit mx-32">
+                <h1 className="font-bold m-10 text-2xl text-ellipsis resize-none">
+                    Create An Account
+                </h1>
                 <form className="flex flex-col gap-10" onSubmit={(e) => {
                     e.preventDefault()
-                    console.log()
+                    const inputs = document.getElementsByTagName("input")
+                    console.log(inputs)
                 }}>
                     <input className="border-black border-2 p-2 rounded-xl" type="text" placeholder="Username"
                         value={username} onChange={(e) => setUsername(e.target.value)} />

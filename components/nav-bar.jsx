@@ -1,10 +1,10 @@
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
+import { GetServerSideProps } from 'next'
+
 
 const NavBar = () => {
     const { data, status } = useSession()
-
-
     return (
         <nav className='bg-black text-white'>
             {/* logo */}
@@ -39,9 +39,14 @@ const NavBar = () => {
                         {status === 'authenticated' ?
                             <>
                                 <div className=''>
-                                    <Link href="/users/TestUser">
+                                    <Link href={`/users/${data.user.username}`} >
                                         My Profile
                                     </Link>
+                                </div>
+                                <div className='hover:cursor-pointer'>
+                                    <div onClick={signOut} >
+                                        Sign Out
+                                    </div>
                                 </div>
                             </>
                             :
@@ -65,7 +70,7 @@ const NavBar = () => {
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav >
 
     )
 }

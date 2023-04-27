@@ -41,6 +41,23 @@ export const authOptions = {
         })
         // ...add more providers here
     ],
+    callbacks: {
+        session: async ({ session, token }) => {
+            if (session?.user) {
+                session.user.username = token.username;
+            }
+            return session;
+        },
+        jwt: async ({ user, token }) => {
+            if (user) {
+                token.username = user.username;
+            }
+            return token;
+        },
+    },
+    session: {
+        strategy: 'jwt',
+    },
     pages: {
         // signIn: '/pages/login',
     }

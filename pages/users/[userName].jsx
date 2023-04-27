@@ -23,10 +23,10 @@ const UserPage = (props) => {
                 <title>{`${props.user.username}'s profile on MyGamesList`}</title>
             </Head>
             <div className="flex items-center">
-                <div className="p-10">
+                <div className="p-10 items-center">
                     <Image className="border border-black rounded-full mx-auto" src="/img/default_profile.jpg" width={200} height={200} />
                     <h1 className="font-bold text-7xl">{props.user.username}</h1>
-                    <div className="mx-auto">
+                    <div className="">
                         <button>Add as a friend</button>
                     </div>
                 </div>

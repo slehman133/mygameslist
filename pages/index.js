@@ -46,7 +46,7 @@ const Home = () => {
             <p>Show off the games you've played and loved, or discover new ones.</p>
             <p>Create an account to start.</p>
             <div className='flex p-10 gap-16'>
-              <Link href="/login">
+              <Link href="/signup">
                 <div className=' border-black border-2 p-10 w-72 text-center 
             hover:bg-black hover:text-white hover:cursor-pointer'>
                   <h1>Create An Account</h1>

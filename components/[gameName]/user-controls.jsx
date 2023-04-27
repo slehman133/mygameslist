@@ -1,13 +1,15 @@
+import { useSession } from "next-auth/react"
 import { useState } from "react"
 
 
 const UserControls = () => {
     const [isLoggedIn, setLoggedIn] = useState(false)
     const [isFavorite, setFavorite] = useState(false)
+    const { data, status } = useSession()
 
     return (
         <div className="my-10 border-black border-2 p-5 rounded-[5px] mx-auto">
-            {isLoggedIn ?
+            {status === 'authenticated' ?
                 <>
                     <div>
                         <div>
