@@ -1,23 +1,29 @@
 import { useState } from "react"
 import GameCard from "../../components/games/gameCard"
-
+import Link from "next/link"
+import Head from "next/head"
 const Search = (props) => {
-    const [searchRes, setSearchRes] = useState([])
+    // const [searchRes, setSearchRes] = useState([])
+    const [gameRes, setGameRes] = useState([])
+    const [userRes, setUserRes] = useState([])
     const [hasSearched, setHasSearched] = useState(false)
     return (
         <>
+            <Head>
+                <title>Search MyGamesList</title>
+            </Head>
             <div className="p-5 m-5 min-h-[75vh]">
-                {/* <h1 className="text-5xl font-bold m-5 mt-0">Search</h1> */}
                 <div className="py-5 m-5">
                     <form
                         action=""
                         onSubmit={async (e) => {
                             e.preventDefault()
                             const query = document.querySelector("[name=search]").value
-                            const res = await fetch(`http://localhost:3000/api/search/${query}`)
+                            const { games, users } = await fetch(`http://localhost:3000/api/search/${query}`)
                                 .then(res => res.json())
                             document.querySelector("[name=search]").value = ""
-                            setSearchRes(res)
+                            setGameRes(games)
+                            setUserRes(users)
                             setHasSearched(true)
                         }}>
                         <div className="grid grid-cols-7">
@@ -26,7 +32,7 @@ const Search = (props) => {
                                     className="text-3xl p-2 m-0 border-2 rounded-l-full pr-80"
                                     type="text"
                                     name="search"
-                                    placeholder="Search for a Game/User"
+                                    placeholder="Search for a game/user..."
                                 />
                                 <input
                                     className="text-3xl bg-black rounded-r-full p-2 hover:cursor-pointer
@@ -38,12 +44,12 @@ const Search = (props) => {
                     </form>
                 </div>
                 <div>
-                    {searchRes.length > 0 &&
+                    {(gameRes.length > 0 || userRes.length > 0) &&
                         <>
                             <h1 className="font-bold text-4xl m-5">Games</h1>
-                            <h1 className="font-bold text-3xl m-5">Results found ({searchRes.length})</h1>
+                            <h1 className="font-bold text-3xl m-5">Results found ({gameRes.length})</h1>
                             <div className="flex flex-row flex-wrap">
-                                {searchRes.map((game) =>
+                                {gameRes.map((game) =>
                                     <GameCard
                                         cover={game.cover}
                                         name={game.name}
@@ -52,10 +58,30 @@ const Search = (props) => {
                                         id={game.id} />)}
                             </div>
                             <h1 className="font-bold text-4xl m-5">Users</h1>
+                            <h1 className="font-bold text-3xl m-5">Results found ({userRes.length})</h1>
+                            <div className="flex flex-row flex-wrap">
+                                {userRes.map((user) =>
+                                    <>
+                                        <Link href={`/users/${user.username}`}>
+                                            <div className="text-center p-5 text-2xl m-5" id={user.id}>
+                                                <div>
+                                                    <img
+                                                        className="rounded-full"
+                                                        src="/img/default_profile.jpg"
+                                                        alt="" />
+                                                </div>
+                                                <div>
+                                                    <h1 className="font-semibold">{user.username}</h1>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    </>
+                                )}
+                            </div>
                         </>
                     }
-                    {((hasSearched == true) && searchRes.length == 0) &&
-                        <h1 className="m-5 font-bold text-3xl">No results found</h1>}
+                    {((hasSearched == true) && (gameRes.length == 0 && userRes.length == 0)) &&
+                        <h1 className="m-5 font-bold text-3xl text-center">No results found</h1>}
                 </div>
             </div >
         </>

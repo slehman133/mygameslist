@@ -7,5 +7,6 @@ export default async function handler(req, res) {
             username
         }
     })
+
     res.status(200).json(user)
 }

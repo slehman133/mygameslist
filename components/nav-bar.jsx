@@ -57,7 +57,7 @@ const NavBar = () => {
                                     </Link>
                                 </div>
                                 <div className=''>
-                                    <Link href="/users/TestUser">
+                                    <Link href="/signup">
                                         Sign Up
                                     </Link>
                                 </div>
@@ -66,7 +66,7 @@ const NavBar = () => {
                     </div>
                     {/* nav burger menu*/}
                     <div>
-                        <button className='md:invisible text-3xl'>&#9776;</button>
+                        <button className='md:invisible text-4xl'>&#9776;</button>
                     </div>
                 </div>
             </div>

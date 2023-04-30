@@ -25,6 +25,8 @@ export async function getServerSideProps(context) {
             cover: `https://${game.cover}`,
             name: game.name,
             summary: game.summary,
+            slug: game.slug,
+            id: game.id,
             reviews
         },
     };
@@ -32,7 +34,7 @@ export async function getServerSideProps(context) {
 
 const GamePage = (props) => {
     const [reviews, setReviews] = useState(props.reviews)
-    const { session, status } = useSession()
+    const { data, status } = useSession()
     return (
         <>
             <Head>
@@ -58,8 +60,21 @@ const GamePage = (props) => {
                     <p className="text-lg">{props.summary}</p>
                     {status === 'authenticated' &&
                         <div className="my-20 ">
-                            <h3 className="text-lg font-bold">Write a review</h3>
-                            <form action="">
+                            <h3 className="text-lg font-semibold m-2">Write a review</h3>
+                            <form action=""
+                                onSubmit={async (e) => {
+                                    e.preventDefault()
+                                    const review = document.querySelector("[name=review]").value
+                                    const result = await fetch(`http://localhost:3000/api/review/${props.id}/${data.user.username}`,
+                                        {
+                                            method: 'POST',
+                                            body: `${review}`,
+                                        })
+                                        .then(res => res.json())
+                                    setReviews([result, ...reviews])
+                                    console.log(reviews)
+                                    document.querySelector("[name=review]").value = ""
+                                }}>
                                 <textarea
                                     className="border-2 h-32 min-w-full p-2"
                                     type="text"
@@ -72,9 +87,6 @@ const GamePage = (props) => {
                                         <input
                                             type="submit"
                                             value="Submit"
-                                            onSubmit={(e) => {
-                                                e.preventDefault()
-                                            }}
                                         />
                                     </div>
                                 </div>
