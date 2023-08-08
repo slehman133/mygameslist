@@ -5,6 +5,17 @@ export default async function handler(req, res) {
     const user = await prisma.user.findFirst({
         where: {
             username
+        },
+        include: {
+            gamesList: {
+                include: {
+                    entries: {
+                        include: {
+                            game: true
+                        }
+                    }
+                }
+            }
         }
     })
 

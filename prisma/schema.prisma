@@ -11,24 +11,27 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  username  String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  reviews   Review[]
+  id          Int        @id @unique @default(autoincrement())
+  username    String     @unique
+  password    String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @default(now())
+  reviews     Review[]
+  gamesList   GamesList?
+  gamesListId Int?
 }
 
 model Game {
-  id         Int      @id
-  name       String
-  summary    String
-  slug       String
-  cover      String
-  reviews    Review[]
-  isFeatured Boolean  @default(false)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now())
+  id             Int              @id @unique
+  name           String
+  summary        String
+  slug           String           @unique
+  cover          String
+  reviews        Review[]
+  isFeatured     Boolean          @default(false)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @default(now())
+  GamesListEntry GamesListEntry[]
 }
 
 model Review {
@@ -36,10 +39,32 @@ model Review {
   author     User   @relation(fields: [authorName], references: [username])
   authorName String
 
-  Game   Game?  @relation(fields: [gameId], references: [id])
-  gameId Int?
-  body   String
-
+  Game      Game?    @relation(fields: [gameId], references: [id])
+  gameId    Int?
+  body      String
+  rating    Int?
+  status    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+}
+
+model GamesList {
+  id        Int              @id @unique @default(autoincrement())
+  username  String           @unique
+  User      User             @relation(fields: [username], references: [username])
+  entries   GamesListEntry[]
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @default(now())
+}
+
+model GamesListEntry {
+  id          Int        @id @unique @default(autoincrement())
+  game        Game       @relation(fields: [gameId], references: [id])
+  rating      Int?
+  status      String?
+  gameId      Int
+  GamesList   GamesList? @relation(fields: [gamesListId], references: [id])
+  gamesListId Int?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @default(now())
 }

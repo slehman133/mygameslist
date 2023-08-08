@@ -3,7 +3,7 @@ import Head from 'next/head'
 import '../styles/globals.css'
 import NavBar from '../components/nav-bar'
 
-export default function App({ Component, pageProps: { session, ...pageProps } }) {
+export default function App({ Component, pageProps }) {
 
   return (
     <SessionProvider session={pageProps.session}>

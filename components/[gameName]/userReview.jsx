@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 const UserReview = (props) => {
     return (
         <>
@@ -9,7 +11,9 @@ const UserReview = (props) => {
                         alt="User profile picture" />
                 </div>
                 <div className="p-5 overflow-hidden">
-                    <h1 className="font-bold text-2xl">{props.username}</h1>
+                    <Link href={`/users/${props.username}`}>
+                        <h1 className="font-bold text-2xl">{props.username}</h1>
+                    </Link>
                     <div className="overflow-auto max-h-52">
                         <p className="font-semibold">{props.body}</p>
                     </div>

@@ -51,6 +51,7 @@ export const authOptions = {
         jwt: async ({ user, token }) => {
             if (user) {
                 token.username = user.username;
+
             }
             return token;
         },
@@ -58,6 +59,13 @@ export const authOptions = {
     session: {
         strategy: 'jwt',
     },
+    secret: process.env.NEXTAUTH_SECRET,
+    jwt: {
+        secret: process.env.NEXTAUTH_SECRET,
+        maxAge: 5 * 60 * 1000,
+    },
+
+
     pages: {
         // signIn: '/pages/login',
     }

@@ -2,6 +2,8 @@ import { useState } from "react"
 import GameCard from "../../components/games/gameCard"
 import Link from "next/link"
 import Head from "next/head"
+import UserResult from "../../components/search/userResult"
+
 const Search = (props) => {
     // const [searchRes, setSearchRes] = useState([])
     const [gameRes, setGameRes] = useState([])
@@ -61,21 +63,7 @@ const Search = (props) => {
                             <h1 className="font-bold text-3xl m-5">Results found ({userRes.length})</h1>
                             <div className="flex flex-row flex-wrap">
                                 {userRes.map((user) =>
-                                    <>
-                                        <Link href={`/users/${user.username}`}>
-                                            <div className="text-center p-5 text-2xl m-5" id={user.id}>
-                                                <div>
-                                                    <img
-                                                        className="rounded-full"
-                                                        src="/img/default_profile.jpg"
-                                                        alt="" />
-                                                </div>
-                                                <div>
-                                                    <h1 className="font-semibold">{user.username}</h1>
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    </>
+                                    <UserResult id={user.id} username={user.username} />
                                 )}
                             </div>
                         </>
